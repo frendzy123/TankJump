@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	private Rigidbody2D body;
+	public float speed = 2.0f;
 
 	// Use this for initialization
 	void Start() 
@@ -23,16 +24,7 @@ public class PlayerController : MonoBehaviour {
 	private void Movement()
 	{
 
-		if (Input.GetKeyDown (KeyCode.D))
-			body.velocity = Vector2.right;
-		
-		else if (Input.GetKeyUp (KeyCode.D))
-			body.velocity = Vector2.zero;
-
-		if (Input.GetKeyDown (KeyCode.A))
-			body.velocity = Vector2.left;
-
-		else if (Input.GetKeyUp (KeyCode.A))
-			body.velocity = Vector2.zero;
+		var move = new Vector3(Input.GetAxis("Horizontal"), 0);
+		transform.position += move * speed * Time.deltaTime;
 	}
 }
