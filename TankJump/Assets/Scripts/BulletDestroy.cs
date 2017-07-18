@@ -22,19 +22,12 @@ public class BulletDestroy : MonoBehaviour {
 	}
 
 	// Function used to destroy when bullet collides with something.
-	void DestroyOnCollision()
-	{
-		
-		Destroy(this.gameObject);
-	}
-
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.GetComponent<Collider2D>().tag == "Environment") {
 			Debug.Log ("collision");
 			GetComponent<SpriteRenderer>().sprite = explosion;
-			GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
+			GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 			Destroy(this.gameObject, 0.5f);
-
 		}
 	}
 }
