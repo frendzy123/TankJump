@@ -27,4 +27,5 @@ public class PlayerController : MonoBehaviour {
 		var move = new Vector3(Input.GetAxis("Horizontal"), 0);
 		transform.position += move * speed * Time.deltaTime;
 	}
+		
 }
