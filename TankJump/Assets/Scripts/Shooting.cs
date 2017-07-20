@@ -27,7 +27,7 @@ public class Shooting : MonoBehaviour {
 		{
 			GameObject bullet = (GameObject) Instantiate(projectile, transform.position, transform.rotation); // Instantiates the bullet
 			Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), transform.parent.GetComponent<Collider2D>()); // Ignore collisions with turret
-			Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), transform.parent.parent.GetComponent<Collider2D>()); // Ignore collisions with tank
+			//Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), transform.parent.parent.GetComponent<Collider2D>()); // Ignore collisions with tank
 			Rigidbody2D bulletRigid = (Rigidbody2D) bullet.GetComponent<Rigidbody2D>(); // Get rigidbody from the bullet.
 			bulletRigid.velocity = transform.right * speed; // Add a velocity towards the direction of the shooting points
 		}
