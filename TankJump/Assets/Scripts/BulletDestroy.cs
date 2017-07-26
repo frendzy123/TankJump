@@ -7,6 +7,7 @@ public class BulletDestroy : MonoBehaviour {
 	public float delay; // Duration the bullet exists in the game.
 	public Sprite explosion;
 	public int returnVelConst = -1;
+	public float hitRadius = 1;
 	private bool pushTank = false;
 	Collider2D playerColl;
 
@@ -25,11 +26,17 @@ public class BulletDestroy : MonoBehaviour {
 
 	// Function used to destroy when bullet collides with something.
 	void OnTriggerEnter2D(Collider2D other) {
-		
-		if(other.GetComponent<Collider2D>().tag == "Player")
+
+		Collider2D[] collidersHit = Physics2D.OverlapCircleAll(this.gameObject.transform.position, hitRadius);
+
+		foreach (Collider2D col in collidersHit) 
 		{
-			playerColl = other.GetComponent<Collider2D>();	
-			pushTank = true;
+
+			if(col.tag == "Player")
+			{
+				playerColl = col;	
+				pushTank = true;
+			}
 		}
 
 		if (other.GetComponent<Collider2D> ().tag == "Environment") 
@@ -41,13 +48,11 @@ public class BulletDestroy : MonoBehaviour {
 				Rigidbody2D playerRigid = playerColl.attachedRigidbody;
 				Rigidbody2D bulletRigid = this.gameObject.GetComponent<Rigidbody2D>();
 				playerRigid.velocity = bulletRigid.velocity * returnVelConst;
-				Debug.Log(pushTank);
 				pushTank = false;
 			}
 
 			GetComponent<SpriteRenderer> ().sprite = explosion;
 			GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
-			Debug.Log(pushTank);
 			Destroy (this.gameObject, 0.5f);
 		} 
 	}
