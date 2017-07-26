@@ -41,6 +41,8 @@ public class BulletDestroy : MonoBehaviour {
 				Rigidbody2D playerRigid = playerColl.attachedRigidbody;
 				Rigidbody2D bulletRigid = this.gameObject.GetComponent<Rigidbody2D>();
 				playerRigid.velocity = bulletRigid.velocity * returnVelConst;
+				Debug.Log(pushTank);
+				pushTank = false;
 			}
 
 			GetComponent<SpriteRenderer> ().sprite = explosion;
