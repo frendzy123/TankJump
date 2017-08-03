@@ -5,6 +5,7 @@ using UnityEngine;
 public class explodeBehavior : MonoBehaviour {
 
 	public int returnVelConst = -1;
+	public int selfDamage = 20;
 	private Vector3 bulletVelocity = Vector3.zero;
 	Rigidbody2D playerBody;
 
@@ -22,7 +23,7 @@ public class explodeBehavior : MonoBehaviour {
 		if (other.GetComponent<Collider2D> ().tag == "Player") {
 			playerBody = other.GetComponent<Rigidbody2D>();
 			playerBody.velocity = bulletVelocity * returnVelConst;
-
+			other.gameObject.GetComponent<PlayerController>().health -= selfDamage;
 		}
 	}
 
