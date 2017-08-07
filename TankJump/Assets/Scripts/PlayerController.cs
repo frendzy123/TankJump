@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-	private Rigidbody2D body;
 	public int health;
 	public int ammo;
 	public float speed = 2.0f;
@@ -14,7 +13,6 @@ public class PlayerController : MonoBehaviour {
 	{
 		health = 100;
 		ammo = 3;
-		body = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame

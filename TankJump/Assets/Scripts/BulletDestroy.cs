@@ -27,6 +27,7 @@ public class BulletDestroy : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other) {
 		if (other.GetComponent<Collider2D> ().tag == "Environment") 
 		{
+			
 			Vector3 bulletVelocity = GetComponent<Rigidbody2D>().velocity; 
 			GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
 			GameObject explode = (GameObject)Instantiate (explosion, transform.position, transform.rotation);
