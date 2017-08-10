@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour {
 	public int health;
 	public int ammo;
 	public float speed = 2.0f;
+	public bool immune = false;
 
 	// Use this for initialization
 	void Start() 
