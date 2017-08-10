@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class TurretController : MonoBehaviour {
 
+	private bool is_paused = false;
+
 	// Use this for initialization
 	void Start() 
 	{
@@ -13,8 +15,9 @@ public class TurretController : MonoBehaviour {
 	// Update is called once per frame
 	void Update() 
 	{
-
-		Aim();
+		if (!is_paused) {
+			Aim ();
+		}
 	}
 
 	// Function that rotates turret to face cursor.
@@ -30,5 +33,9 @@ public class TurretController : MonoBehaviour {
 
 		float angle = Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg; //Calculate angle in rads using tan of x and y
 		transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+	}
+
+	public void Pause() {
+		is_paused = !is_paused;
 	}
 }

@@ -5,6 +5,8 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour {
 
 	public GameObject PauseUI;
+	public GameObject shootingPoint;
+	public GameObject turret;
 
 	private bool paused = false;
 
@@ -18,17 +20,7 @@ public class PauseMenu : MonoBehaviour {
 	void Update () {
 
 		if (Input.GetButtonDown ("Pause")) {
-			paused = !paused;
-		}
-
-		if (paused) {
-			PauseUI.SetActive(true);
-			Time.timeScale = 0;
-		}
-
-		if (!paused) {
-			PauseUI.SetActive(false);
-			Time.timeScale = 1;
+			ChangePauseState();
 		}
 	}
 
@@ -36,7 +28,21 @@ public class PauseMenu : MonoBehaviour {
 		return paused;
 	}
 
+	private void ChangePauseState() {
+		paused = !paused;
+		shootingPoint.GetComponent<Shooting>().Pause();
+		turret.GetComponent<TurretController>().Pause();
+
+		if (paused) {
+			PauseUI.SetActive(true);
+			Time.timeScale = 0;
+		} else {
+			PauseUI.SetActive(false);
+			Time.timeScale = 1;
+		}
+	}
+
 	public void Resume() {
-		paused = false;
+		ChangePauseState();
 	}
 }
