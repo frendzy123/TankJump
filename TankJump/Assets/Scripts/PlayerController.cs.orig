@@ -1,0 +1,49 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerController : MonoBehaviour {
+
+	public int health;
+	public int ammo;
+	public float speed = 2.0f;
+<<<<<<< HEAD
+	public bool immune = false;
+=======
+	public float tankRadius = 0.5f;
+>>>>>>> af6459895e4d29eb55e86c5c94d608371ce8abe9
+
+	// Use this for initialization
+	void Start() 
+	{
+		health = 100;
+		ammo = 3;
+	}
+	
+	// Update is called once per frame
+	void Update() 
+	{
+		Vector3 playerPos = transform.position;
+
+		transform.position = Movement(playerPos);
+	
+	}
+
+	private Vector3 Movement(Vector3 pos)
+	{
+		var move = new Vector3(Input.GetAxis("Horizontal"), 0);
+		pos += move * speed * Time.deltaTime;
+
+		if (pos.x + tankRadius > Camera.main.orthographicSize) {
+			pos.x = Camera.main.orthographicSize - tankRadius;
+		}
+
+		if (pos.x - tankRadius < -Camera.main.orthographicSize) {
+			pos.x = -Camera.main.orthographicSize + tankRadius;
+		}
+
+		return pos;
+
+	}
+		
+}
