@@ -32,7 +32,7 @@ public class Shooting : MonoBehaviour {
 
 	void Shoot()
 	{
-
+//		Debug.Log (player.GetComponent<PlayerController> ().checkPause ());
 
 		if(player.GetComponent<PlayerController>().ammo > 0)
 		{

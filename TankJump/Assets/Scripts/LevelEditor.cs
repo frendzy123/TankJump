@@ -50,8 +50,6 @@ public class LevelEditor : MonoBehaviour {
 	}
 
 	void GenerateTile(Color32 c, int x, int y) {
-		Color32 pixelColor = level.GetPixel(x, y);
-
 		if (c.a <= 0) {
 			return;
 		}
@@ -60,7 +58,7 @@ public class LevelEditor : MonoBehaviour {
 		{
 			if (colorMapping.color.Equals(c)) {
 				Debug.Log (colorMapping.color);
-				GameObject tile = (GameObject) Instantiate (colorMapping.prefab, new Vector2 (x, y), Quaternion.identity, transform);
+				Instantiate (colorMapping.prefab, new Vector2 (x, y), Quaternion.identity, transform);
 				return;
 			}	
 		}

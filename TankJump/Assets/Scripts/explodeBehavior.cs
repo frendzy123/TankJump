@@ -22,14 +22,29 @@ public class explodeBehavior : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		if (other.GetComponent<Collider2D> ().tag == "Player") {
-			playerBody = other.GetComponent<Rigidbody2D>();
+
+		GameObject col = FindParent(other.gameObject, "Player");
+
+		if (col != null) {
+			playerBody = col.GetComponent<Rigidbody2D>();
 			playerBody.velocity = bulletVelocity * returnVelConst;
 			//other.gameObject.GetComponent<PlayerController>().health -= selfDamage;
-			other.gameObject.GetComponent<PlayerController> ().changeHealth (-selfDamage);
+			col.GetComponent<PlayerMovement> ().changeHealth (-selfDamage);
 
 		}
 	}
+
+	GameObject FindParent (GameObject child, string tag) {
+		Transform t = child.transform;
+
+		while (t.parent != null) {
+			if (t.parent.tag == tag) {
+				return t.parent.gameObject;
+			}
+			t = t.parent.transform;
+		}
+		return null;
+	} 
 
 	public void KnockbackSpeed(Vector3 vel) {
 		bulletVelocity = vel;

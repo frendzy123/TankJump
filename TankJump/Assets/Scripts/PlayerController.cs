@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour {
 	public int health;
 	public int ammo;
 	public float speed;
+
+	private bool is_paused = false;
 	//public float tankRadius = 0.5f;
 
 	// Use this for initialization
@@ -74,5 +76,13 @@ public class PlayerController : MonoBehaviour {
 	public void changeAmmo(int n) {
 		ammo += n;
 		hud[1].text = ammo.ToString();
+	}
+
+	public void Pause() {
+		is_paused = !is_paused;
+	}
+
+	public bool checkPause() {
+		return is_paused;
 	}
 }

@@ -5,15 +5,13 @@ using UnityEngine;
 public class PauseMenu : MonoBehaviour {
 
 	public GameObject PauseUI;
-	public GameObject shootingPoint;
-	public GameObject turret;
+	public GameObject player;
 
 	private bool paused = false;
 
 	// Use this for initialization
 	void Start () {
 		PauseUI.SetActive (false);
-
 	}
 	
 	// Update is called once per frame
@@ -23,13 +21,13 @@ public class PauseMenu : MonoBehaviour {
 			ChangePauseState();
 		}
 			
-		if (shootingPoint == null) {
-			shootingPoint = GameObject.FindGameObjectWithTag ("ShootingPoint");
-		}
-
-		if (turret == null) {
-			turret = GameObject.FindGameObjectWithTag ("Turret");
-		}
+//		if (shootingPoint == null) {
+//			shootingPoint = GameObject.FindWithTag ("ShootingPoint");
+//		}
+//
+//		if (turret == null) {
+//			turret = GameObject.FindWithTag ("Turret");
+//		}
 	}
 
 	public bool GetPauseStatus() {
@@ -38,8 +36,10 @@ public class PauseMenu : MonoBehaviour {
 
 	private void ChangePauseState() {
 		paused = !paused;
-		shootingPoint.GetComponent<Shooting>().Pause();
-		turret.GetComponent<TurretController>().Pause();
+//		player.GetComponent<PlayerController> ().Pause ();
+//		Debug.Log(player.GetComponent<PlayerController> ().checkPause ());
+//		shootingPoint.GetComponent<Shooting>().Pause();
+//		turret.GetComponent<TurretController>().Pause();
 
 		if (paused) {
 			PauseUI.SetActive(true);
