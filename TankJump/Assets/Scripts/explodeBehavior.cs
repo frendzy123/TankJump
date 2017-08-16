@@ -7,7 +7,7 @@ public class explodeBehavior : MonoBehaviour {
 	public GameObject hud;
 
 	public int returnVelConst = -1;
-	public int selfDamage = 20;
+	public int selfDamage = 10;
 	private Vector3 bulletVelocity = Vector3.zero;
 	Rigidbody2D playerBody;
 
@@ -22,6 +22,7 @@ public class explodeBehavior : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
+		Debug.Log (other.tag);
 
 		GameObject col = FindParent(other.gameObject, "Player");
 
