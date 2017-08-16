@@ -5,20 +5,27 @@ using UnityEngine.UI;
 
 public class HUDScript : MonoBehaviour {
 
-	private GameObject player;
+	public GameObject player;
+
 	private Text[] hud;
 
 	// Use this for initialization
 	void Start () {
-		
-		player = GameObject.FindWithTag("Player");
+
 		hud = GetComponentsInChildren<Text>();
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
+		if (player == null) {
+			player = GameObject.FindGameObjectWithTag ("Player");
+		}
 
-		hud[0].text = (player.GetComponent<PlayerController>().health).ToString();
-		hud[1].text = (player.GetComponent<PlayerController>().ammo).ToString();
+		Debug.Log(player.GetComponent<PlayerController>().viewHealth());
+		//Debug.Log (player.GetComponent<PlayerController>().viewHealth());
+		//Debug.Log (player.GetComponent<PlayerController> ().viewAmmo());
+
+		//hud[0].text = (player.GetComponent<PlayerController>().viewHealth()).ToString();
+		//hud[1].text = (player.GetComponent<PlayerController>().viewAmmo()).ToString();
 	}
 }

@@ -6,6 +6,7 @@ public class Shooting : MonoBehaviour {
 
 	public GameObject projectile;
 	public GameObject player;
+	public GameObject hud;
 
 	public float speed;
 
@@ -41,6 +42,8 @@ public class Shooting : MonoBehaviour {
 			Rigidbody2D bulletRigid = (Rigidbody2D) bullet.GetComponent<Rigidbody2D>(); // Get rigidbody from the bullet.
 			bulletRigid.velocity = transform.right * speed; // Add a velocity towards the direction of the shooting points
 			transform.parent.parent.GetComponent<PlayerController>().ammo -= 1;
+
+
 		}
 		
 	}

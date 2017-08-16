@@ -22,6 +22,14 @@ public class PauseMenu : MonoBehaviour {
 		if (Input.GetButtonDown ("Pause")) {
 			ChangePauseState();
 		}
+			
+		if (shootingPoint == null) {
+			shootingPoint = GameObject.FindGameObjectWithTag ("ShootingPoint");
+		}
+
+		if (turret == null) {
+			turret = GameObject.FindGameObjectWithTag ("Turret");
+		}
 	}
 
 	public bool GetPauseStatus() {
@@ -43,6 +51,7 @@ public class PauseMenu : MonoBehaviour {
 	}
 
 	public void Resume() {
+		Debug.Log("clicked");
 		ChangePauseState();
 	}
 }
