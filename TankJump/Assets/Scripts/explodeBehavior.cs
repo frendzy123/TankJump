@@ -25,7 +25,8 @@ public class explodeBehavior : MonoBehaviour {
 		if (other.GetComponent<Collider2D> ().tag == "Player") {
 			playerBody = other.GetComponent<Rigidbody2D>();
 			playerBody.velocity = bulletVelocity * returnVelConst;
-			other.gameObject.GetComponent<PlayerController>().health -= selfDamage;
+			//other.gameObject.GetComponent<PlayerController>().health -= selfDamage;
+			other.gameObject.GetComponent<PlayerController> ().changeHealth (-selfDamage);
 
 		}
 	}

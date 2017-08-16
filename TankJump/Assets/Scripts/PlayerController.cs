@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
@@ -20,7 +21,15 @@ public class PlayerController : MonoBehaviour {
 		ammo = 500;
 		speed = 2.0f;
 
+		HUD = GameObject.FindWithTag("HUD");
+
 		hud = HUD.GetComponentsInChildren<Text>();
+
+		hud [0].text = health.ToString();
+		hud [1].text = ammo.ToString();
+
+
+
 	}
 	
 	// Update is called once per frame
@@ -55,5 +64,15 @@ public class PlayerController : MonoBehaviour {
 
 	public int viewAmmo() {
 		return ammo;
+	}
+
+	public void changeHealth(int n) {
+		health += n;
+		hud[0].text = health.ToString();
+	}
+
+	public void changeAmmo(int n) {
+		ammo += n;
+		hud[1].text = ammo.ToString();
 	}
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class HUDScript : MonoBehaviour {
 
-	public GameObject player;
+	//public GameObject player;
 
 	private Text[] hud;
 
@@ -17,15 +17,23 @@ public class HUDScript : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if (player == null) {
-			player = GameObject.FindGameObjectWithTag ("Player");
-		}
+		/*if (player == null) {
+			player = GameObject.FindWithTag("Player");
+		}*/
 
-		Debug.Log(player.GetComponent<PlayerController>().viewHealth());
+		//Debug.Log(player.GetComponent<PlayerController>().viewHealth());
 		//Debug.Log (player.GetComponent<PlayerController>().viewHealth());
 		//Debug.Log (player.GetComponent<PlayerController> ().viewAmmo());
 
 		//hud[0].text = (player.GetComponent<PlayerController>().viewHealth()).ToString();
+		//hud[1].text = (player.GetComponent<PlayerController>().viewAmmo()).ToString();
+	}
+
+	public void updateHealth() {
+		//hud[0].text = (player.GetComponent<PlayerController>().viewHealth()).ToString();
+	}
+
+	public void updateAmmo() {
 		//hud[1].text = (player.GetComponent<PlayerController>().viewAmmo()).ToString();
 	}
 }
