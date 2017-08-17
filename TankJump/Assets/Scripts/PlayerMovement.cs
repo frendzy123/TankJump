@@ -12,10 +12,12 @@ public class PlayerMovement : MonoBehaviour {
 	public int health;
 	public int ammo;
 	public float speed;
+	public float invincibilityTime = 0.2f;
 
 	private GameObject turret;
 
-	private bool is_paused = false;
+	private bool isPaused = false;
+	private bool isInvincible = false;
 
 
 	// Use this for initialization
@@ -38,7 +40,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-		if (!is_paused) {
+		if (!isPaused) {
 			Aim ();
 
 			if (Input.GetKeyDown (KeyCode.Mouse0)) {
@@ -64,13 +66,13 @@ public class PlayerMovement : MonoBehaviour {
 		var move = new Vector3(Input.GetAxis("Horizontal"), 0);
 		pos += move * speed * Time.deltaTime;
 
-		if (pos.x > Camera.main.orthographicSize+21f) {
+		/*if (pos.x > Camera.main.orthographicSize+21f) {
 			pos.x = Camera.main.orthographicSize+21f;
 		}
 
 		if (pos.x < -Camera.main.orthographicSize+10f) {
 			pos.x = -Camera.main.orthographicSize+10f;
-		}
+		}*/
 
 		return pos;
 
@@ -100,7 +102,7 @@ public class PlayerMovement : MonoBehaviour {
 			Debug.Log (shooting_point);
 
 			GameObject bullet = (GameObject) Instantiate(projectile, shooting_point, turret.transform.rotation); // Instantiates the bullet
-			Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), transform.parent.GetComponent<Collider2D>()); // Ignore collisions with turret
+			Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), turret.GetComponent<Collider2D>()); // Ignore collisions with turret
 			//Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), transform.parent.parent.GetComponent<Collider2D>()); // Ignore collisions with tank
 			Rigidbody2D bulletRigid = (Rigidbody2D) bullet.GetComponent<Rigidbody2D>(); // Get rigidbody from the bullet.
 			bulletRigid.velocity = turret.transform.right * speed; // Add a velocity towards the direction of the shooting points
@@ -130,10 +132,23 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	public void Pause() {
-		is_paused = !is_paused;
+		isPaused = !isPaused;
 	}
 
 	public bool checkPause() {
-		return is_paused;
+		return isPaused;
+	}
+
+	public bool checkInvincible() {
+		return isInvincible;
+	}
+
+	public void enableInvincible() {
+		isInvincible = !isInvincible;
+		Invoke ("disableInvincible", 0.2f);
+	}
+
+	public void disableInvincible() {
+		isInvincible = false;
 	}
 }

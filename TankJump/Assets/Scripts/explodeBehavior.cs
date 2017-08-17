@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class explodeBehavior : MonoBehaviour {
 
-	public GameObject hud;
-
 	public int returnVelConst = -1;
 	public int selfDamage = 10;
+	public float explodeTime = 0.3f;
+
 	private Vector3 bulletVelocity = Vector3.zero;
 	Rigidbody2D playerBody;
 
 	// Use this for initialization
 	void Start () {
-		Destroy (this.gameObject, 0.5f);
+		Destroy (this.gameObject, explodeTime);
 	}
 
 	// Update is called once per frame
@@ -22,16 +22,16 @@ public class explodeBehavior : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D other) {
-		Debug.Log (other.tag);
+		//GameObject col = FindParent(other.gameObject, "Player");
+		Debug.Log(other);
 
-		GameObject col = FindParent(other.gameObject, "Player");
-
-		if (col != null) {
-			playerBody = col.GetComponent<Rigidbody2D>();
+		if (other.tag == "Player" && !other.GetComponentInParent<PlayerMovement>().checkInvincible()) {
+			//other.GetComponentInParent<PlayerMovement> ().enableInvincible();
+			playerBody = other.GetComponent<Rigidbody2D>();
 			playerBody.velocity = bulletVelocity * returnVelConst;
 			//other.gameObject.GetComponent<PlayerController>().health -= selfDamage;
-			col.GetComponent<PlayerMovement> ().changeHealth (-selfDamage);
 
+			other.GetComponentInParent<PlayerMovement> ().changeHealth (-selfDamage);
 		}
 	}
 
