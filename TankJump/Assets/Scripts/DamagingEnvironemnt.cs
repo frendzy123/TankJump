@@ -6,14 +6,14 @@ public class DamagingEnvironemnt : MonoBehaviour {
 
 	public int damage;
 	public int damageDelay;
-	private bool enabled;
+	private bool on;
 
 	// Use this for initialization
 	void Start () {
 		
 		damage = 20;
 		damageDelay = 2;
-		enabled = true;
+		on = true;
 	}
 	
 	// Update is called once per frame
@@ -26,17 +26,17 @@ public class DamagingEnvironemnt : MonoBehaviour {
 
 		if(coll.gameObject.tag == "Player") 
 		{
-			if(enabled) 
+			if(on) 
 			{
 
-				enabled = false;
-				coll.gameObject.GetComponent<PlayerController> ().health -= damage;
+				on = false;
+				coll.gameObject.GetComponent<PlayerController> ().changeHealth(-damage);
 				Invoke ("Delay", damageDelay);
 			}
 		}
 	}
 
 	void Delay(){
-		enabled = true;
+		on = true;
 	}
 }

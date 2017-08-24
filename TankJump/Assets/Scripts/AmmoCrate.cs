@@ -23,7 +23,7 @@ public class AmmoCrate : MonoBehaviour {
 		if(coll.gameObject.tag == "Player") 
 		{
 
-			coll.gameObject.GetComponent<PlayerController>().ammo += ammoCount;
+			coll.gameObject.GetComponent<PlayerController>().changeAmmo(ammoCount);
 			Destroy(this.gameObject);
 		}
 	}

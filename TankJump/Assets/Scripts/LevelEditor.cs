@@ -10,22 +10,28 @@ public class ColorToPrefab {
 
 public class LevelEditor : MonoBehaviour {
 
-	public Texture2D level;
+	private Texture2D level;
+	private int levelNumber;
+	private string levelPath;
 
 	public ColorToPrefab[] colorMappings;
 
 	// Use this for initialization
 	void Awake ()
 	{
+
+		level = Resources.Load("Levels/Level1") as Texture2D;
 		LoadLevel();
 	}
 
 	void Start () 
 	{
 		
+		levelNumber = 1;
+		levelPath = "Levels/Level";
 	}
 
-	void LoadLevel() {
+	private void LoadLevel() {
 		EmptyLevel();
 
 		Color32[] allPixels = level.GetPixels32();
@@ -40,7 +46,7 @@ public class LevelEditor : MonoBehaviour {
 
 	}
 
-	void EmptyLevel() {
+	private void EmptyLevel() {
 		//Finds and destroys all tiles
 		while (transform.childCount > 0) {
 			Transform c = transform.GetChild(0); //Gets first child
@@ -49,7 +55,12 @@ public class LevelEditor : MonoBehaviour {
 		}
 	}
 
+<<<<<<< Updated upstream
 	void GenerateTile(Color32 c, int x, int y) {
+=======
+	private void GenerateTile(Color32 c, int x, int y) {
+		
+>>>>>>> Stashed changes
 		if (c.a <= 0) {
 			return;
 		}
@@ -57,12 +68,25 @@ public class LevelEditor : MonoBehaviour {
 		foreach (ColorToPrefab colorMapping in colorMappings) 
 		{
 			if (colorMapping.color.Equals(c)) {
+<<<<<<< Updated upstream
 				Debug.Log (colorMapping.color);
+=======
+				//Debug.Log (colorMapping.color);
+>>>>>>> Stashed changes
 				Instantiate (colorMapping.prefab, new Vector2 (x, y), Quaternion.identity, transform);
 				return;
 			}	
 		}
 
-		Debug.LogError ("No color found: "+ c.ToString()+ " at x: "+x.ToString()+" and y: "+ y.ToString());
+		//Debug.LogError ("No color found: "+ c.ToString()+ " at x: "+x.ToString()+" and y: "+ y.ToString());
+	}
+
+	public void nextLevel()
+	{
+
+		levelNumber += 1;
+		string path = levelPath + levelNumber.ToString();
+		level = Resources.Load(path) as Texture2D;
+		LoadLevel();
 	}
 }
