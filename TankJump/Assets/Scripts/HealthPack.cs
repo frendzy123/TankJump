@@ -23,7 +23,7 @@ public class HealthPack : MonoBehaviour {
 		if(coll.gameObject.tag == "Player") 
 		{
 
-			coll.gameObject.GetComponent<PlayerController>().changeHealth(healthCount);
+			coll.gameObject.GetComponent<PlayerMovement>().ChangeHealth(healthCount);
 			Destroy(this.gameObject);
 		}
 	}

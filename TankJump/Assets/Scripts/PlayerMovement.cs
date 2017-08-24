@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour {
 	private bool isPaused = false;
 	private bool isInvincible = false;
 
+	private Rigidbody2D rigid;
+
 
 	// Use this for initialization
 	void Start() 
@@ -35,11 +37,19 @@ public class PlayerMovement : MonoBehaviour {
 		hud [1].text = ammo.ToString();
 
 		turret = transform.Find("turret").gameObject;
+		rigid = this.gameObject.GetComponent<Rigidbody2D> ();
 
 	}
 
 	// Update is called once per frame
 	void Update() {
+
+		if (rigid.IsSleeping ())
+		{
+
+			rigid.WakeUp();
+		}
+
 		if (!isPaused) {
 			Aim ();
 
@@ -106,27 +116,27 @@ public class PlayerMovement : MonoBehaviour {
 			//Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), transform.parent.parent.GetComponent<Collider2D>()); // Ignore collisions with tank
 			Rigidbody2D bulletRigid = (Rigidbody2D) bullet.GetComponent<Rigidbody2D>(); // Get rigidbody from the bullet.
 			bulletRigid.velocity = turret.transform.right * speed; // Add a velocity towards the direction of the shooting points
-			changeAmmo(-1);
+			ChangeAmmo(-1);
 		}
 
 	}
 
 
 /*------------ Public methods -----------------*/
-	public int viewHealth() {
+	public int ViewHealth() {
 		return health;
 	}
 
-	public int viewAmmo() {
+	public int ViewAmmo() {
 		return ammo;
 	}
 
-	public void changeHealth(int n) {
+	public void ChangeHealth(int n) {
 		health += n;
 		hud[0].text = health.ToString();
 	}
 
-	public void changeAmmo(int n) {
+	public void ChangeAmmo(int n) {
 		ammo += n;
 		hud[1].text = ammo.ToString();
 	}
@@ -135,20 +145,31 @@ public class PlayerMovement : MonoBehaviour {
 		isPaused = !isPaused;
 	}
 
-	public bool checkPause() {
+	public bool CheckPause() {
 		return isPaused;
 	}
 
-	public bool checkInvincible() {
+	public bool CheckInvincible() {
 		return isInvincible;
 	}
 
-	public void enableInvincible() {
+	public void EnableInvincible() {
 		isInvincible = !isInvincible;
-		Invoke ("disableInvincible", 0.2f);
+		Invoke ("DisableInvincible", invincibilityTime);
 	}
 
-	public void disableInvincible() {
+	public void DisableInvincible() {
 		isInvincible = false;
+	}
+
+	public void DealDamage(int n)
+	{
+
+		if (!CheckInvincible()) 
+		{
+
+			ChangeHealth(n);
+			EnableInvincible();
+		}
 	}
 }

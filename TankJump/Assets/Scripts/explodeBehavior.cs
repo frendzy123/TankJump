@@ -25,13 +25,13 @@ public class explodeBehavior : MonoBehaviour {
 		//GameObject col = FindParent(other.gameObject, "Player");
 		Debug.Log(other);
 
-		if (other.tag == "Player" && !other.GetComponentInParent<PlayerMovement>().checkInvincible()) {
+		if (other.tag == "Player" /*&& !other.GetComponentInParent<PlayerMovement>().checkInvincible()*/) {
 			//other.GetComponentInParent<PlayerMovement> ().enableInvincible();
 			playerBody = other.GetComponent<Rigidbody2D>();
 			playerBody.velocity = bulletVelocity * returnVelConst;
 			//other.gameObject.GetComponent<PlayerController>().health -= selfDamage;
 
-			other.GetComponentInParent<PlayerMovement> ().changeHealth (-selfDamage);
+			other.GetComponentInParent<PlayerMovement>().DealDamage(-selfDamage);
 		}
 	}
 

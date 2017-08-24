@@ -10,7 +10,7 @@ public class ColorToPrefab {
 
 public class LevelEditor : MonoBehaviour {
 
-	private Texture2D level;
+	public Texture2D level;
 	private int levelNumber;
 	private string levelPath;
 
@@ -20,7 +20,7 @@ public class LevelEditor : MonoBehaviour {
 	void Awake ()
 	{
 
-		level = Resources.Load("Levels/Level1") as Texture2D;
+		//level = Resources.Load("Levels/Level1") as Texture2D;
 		LoadLevel();
 	}
 
@@ -55,24 +55,21 @@ public class LevelEditor : MonoBehaviour {
 		}
 	}
 
-<<<<<<< Updated upstream
-	void GenerateTile(Color32 c, int x, int y) {
-=======
-	private void GenerateTile(Color32 c, int x, int y) {
+
+	private void GenerateTile(Color32 c, int x, int y) 
+	{
 		
->>>>>>> Stashed changes
 		if (c.a <= 0) {
 			return;
 		}
 
 		foreach (ColorToPrefab colorMapping in colorMappings) 
 		{
-			if (colorMapping.color.Equals(c)) {
-<<<<<<< Updated upstream
-				Debug.Log (colorMapping.color);
-=======
+			
+			if (colorMapping.color.Equals(c)) 
+			{
+				
 				//Debug.Log (colorMapping.color);
->>>>>>> Stashed changes
 				Instantiate (colorMapping.prefab, new Vector2 (x, y), Quaternion.identity, transform);
 				return;
 			}	
