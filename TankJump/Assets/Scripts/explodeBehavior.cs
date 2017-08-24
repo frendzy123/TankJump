@@ -6,14 +6,13 @@ public class explodeBehavior : MonoBehaviour {
 
 	public int returnVelConst = -1;
 	public int selfDamage = 10;
-	public float explodeTime = 0.3f;
 
 	private Vector3 bulletVelocity = Vector3.zero;
 	Rigidbody2D playerBody;
 
 	// Use this for initialization
 	void Start () {
-		Destroy (this.gameObject, explodeTime);
+		
 	}
 
 	// Update is called once per frame

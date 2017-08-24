@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour {
 
 	private Rigidbody2D rigid;
 
+	public GameObject deathParticle; 
+
 
 	// Use this for initialization
 	void Start() 
@@ -56,6 +58,11 @@ public class PlayerMovement : MonoBehaviour {
 			if (Input.GetKeyDown (KeyCode.Mouse0)) {
 				Shoot ();
 			}
+		}
+
+		if (health <= 0) {
+			Instantiate (deathParticle, transform.position, transform.rotation);
+			GetComponentInParent<LevelEditor>().restartLevel ();
 		}
 	}
 

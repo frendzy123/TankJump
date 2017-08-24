@@ -86,4 +86,9 @@ public class LevelEditor : MonoBehaviour {
 		level = Resources.Load(path) as Texture2D;
 		LoadLevel();
 	}
+
+	public void restartLevel() 
+	{
+		LoadLevel ();
+	}
 }
