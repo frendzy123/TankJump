@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	private bool isPaused = false;
 	private bool isInvincible = false;
+	private bool canMove = true;
 
 	private Rigidbody2D rigid;
 
@@ -69,9 +70,19 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per physics loop
 	void FixedUpdate()
 	{
-		Vector3 playerPos = transform.position;
 
-		transform.position = Movement(playerPos);
+		if(rigid.velocity == Vector2.zero) 
+		{
+
+			EnableMovement();
+		}
+
+		if(canMove) 
+		{
+			
+			Vector3 playerPos = transform.position;
+			transform.position = Movement (playerPos);
+		}
 	}
 
 
@@ -95,6 +106,16 @@ public class PlayerMovement : MonoBehaviour {
 
 	}
 
+	private void EnableMovement()
+	{
+
+		if(!canMove) 
+		{
+
+			canMove = true;
+		}
+	}
+
 /*------------ Turret Movement -----------------*/
 	void Aim()
 	{
@@ -116,7 +137,7 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			Vector3 shooting_point = turret.transform.GetChild(0).transform.position;
 
-			Debug.Log (shooting_point);
+			//Debug.Log (shooting_point);
 
 			GameObject bullet = (GameObject) Instantiate(projectile, shooting_point, turret.transform.rotation); // Instantiates the bullet
 			Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), turret.GetComponent<Collider2D>()); // Ignore collisions with turret
@@ -179,4 +200,11 @@ public class PlayerMovement : MonoBehaviour {
 			EnableInvincible();
 		}
 	}
+
+	public void DisableMovement()
+	{
+
+		canMove = false;
+	}
+
 }

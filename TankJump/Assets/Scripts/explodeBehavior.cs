@@ -22,7 +22,7 @@ public class explodeBehavior : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other) {
 		//GameObject col = FindParent(other.gameObject, "Player");
-		Debug.Log(other);
+		//Debug.Log(other);
 
 		if (other.tag == "Player" /*&& !other.GetComponentInParent<PlayerMovement>().checkInvincible()*/) {
 			//other.GetComponentInParent<PlayerMovement> ().enableInvincible();
@@ -31,6 +31,7 @@ public class explodeBehavior : MonoBehaviour {
 			//other.gameObject.GetComponent<PlayerController>().health -= selfDamage;
 
 			other.GetComponentInParent<PlayerMovement>().DealDamage(-selfDamage);
+			other.GetComponentInParent<PlayerMovement> ().DisableMovement ();
 		}
 	}
 
