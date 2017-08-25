@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour {
 	private bool isPaused = false;
 	private bool isInvincible = false;
 	private bool canMove = true;
+	private bool inBounds = true;
 
 	private Rigidbody2D rigid;
 
@@ -61,9 +62,8 @@ public class PlayerMovement : MonoBehaviour {
 			}
 		}
 
-		if (health <= 0) {
-			Instantiate (deathParticle, transform.position, transform.rotation);
-			GetComponentInParent<LevelEditor>().restartLevel ();
+		if (health <= 0 || !inBounds) {
+			Die ();
 		}
 	}
 
@@ -149,6 +149,32 @@ public class PlayerMovement : MonoBehaviour {
 
 	}
 
+/*---------- Die/Respawn System --------*/
+	public void Die() {
+		StartCoroutine ("DieFunction");
+	}
+
+	private IEnumerator DieFunction() {
+		GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
+		Instantiate (deathParticle, transform.position, transform.rotation);
+		//Destroy (this.gameObject);
+		yield return new WaitForSeconds (1f);
+		GetComponentInParent<LevelEditor>().restartLevel ();
+		inBounds = true;
+	}
+
+	void OnTriggerStay2D(Collider2D other) {
+		if (other.tag == "MainCamera") {
+			inBounds = true;
+		}
+	}
+
+	void OnTriggerExit2D(Collider2D other) {
+		if (other.tag == "MainCamera") {
+			inBounds = false;
+		}
+		Debug.Log (inBounds);
+	}
 
 /*------------ Public methods -----------------*/
 	public int ViewHealth() {
