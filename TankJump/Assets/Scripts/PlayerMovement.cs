@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour {
 	private bool isInvincible = false;
 	private bool canMove = true;
 	private bool inBounds = true;
+	private bool isAlive = true;
 
 	private Rigidbody2D rigid;
 
@@ -47,7 +48,6 @@ public class PlayerMovement : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-
 		if (rigid.IsSleeping ())
 		{
 
@@ -64,6 +64,8 @@ public class PlayerMovement : MonoBehaviour {
 
 		if (health <= 0 || !inBounds) {
 			Die ();
+			health = 100;
+			inBounds = true;
 		}
 	}
 
@@ -73,11 +75,10 @@ public class PlayerMovement : MonoBehaviour {
 
 		if(rigid.velocity == Vector2.zero) 
 		{
-
 			EnableMovement();
 		}
 
-		if(canMove) 
+		if(canMove && isAlive) 
 		{
 			
 			Vector3 playerPos = transform.position;
@@ -155,12 +156,14 @@ public class PlayerMovement : MonoBehaviour {
 	}
 
 	private IEnumerator DieFunction() {
+		transform.localScale = Vector3.zero;
 		GetComponent<Rigidbody2D> ().velocity = Vector2.zero;
 		Instantiate (deathParticle, transform.position, transform.rotation);
 		//Destroy (this.gameObject);
-		yield return new WaitForSeconds (1f);
+		yield return new WaitForSeconds (2f);
 		GetComponentInParent<LevelEditor>().restartLevel ();
 		inBounds = true;
+		isAlive = true;
 	}
 
 	void OnTriggerStay2D(Collider2D other) {
