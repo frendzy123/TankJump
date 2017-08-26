@@ -31,7 +31,7 @@ public class explodeBehavior : MonoBehaviour {
 			//other.gameObject.GetComponent<PlayerController>().health -= selfDamage;
 
 			other.GetComponentInParent<PlayerMovement>().DealDamage(-selfDamage);
-			other.GetComponentInParent<PlayerMovement> ().DisableMovement ();
+			other.GetComponentInParent<PlayerMovement> ().DisableMovement();
 		}
 	}
 

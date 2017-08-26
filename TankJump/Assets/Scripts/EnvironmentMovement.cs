@@ -45,7 +45,6 @@ public class EnvironmentMovement : MonoBehaviour {
 		if (gameObject.transform.position.y < startingPosition.y + distance && back) {
 			
 			gameObject.transform.position += Vector3.up * speed;
-			Debug.Log (1);
 		} 
 
 		else 
@@ -57,7 +56,6 @@ public class EnvironmentMovement : MonoBehaviour {
 		if (gameObject.transform.position.y > startingPosition.y && !back) {
 
 			gameObject.transform.position += Vector3.up * -speed;
-			Debug.Log (0);
 		}
 
 		else 

@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 	public float invincibilityTime = 0.2f;
 
 	private GameObject turret;
+	private SpriteRenderer[] renderer;
 
 	private bool isPaused = false;
 	private bool isInvincible = false;
@@ -43,6 +44,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		turret = transform.Find("turret").gameObject;
 		rigid = this.gameObject.GetComponent<Rigidbody2D> ();
+		renderer = this.gameObject.GetComponentsInChildren<SpriteRenderer> ();
 
 	}
 
@@ -54,15 +56,39 @@ public class PlayerMovement : MonoBehaviour {
 			rigid.WakeUp();
 		}
 
-		if (!isPaused) {
+		if (isInvincible) {
+
+			foreach (SpriteRenderer rend in renderer) 
+			{
+
+				rend.color = new Color (255f, 0f, 0f, 255f);
+			}
+		} 
+		else 
+		{
+
+			foreach (SpriteRenderer rend in renderer) 
+			{
+
+				rend.color = new Color (255f, 255f, 255f, 255f);
+			}
+		}
+
+		if (!isPaused) 
+		{
+			
 			Aim ();
 
-			if (Input.GetKeyDown (KeyCode.Mouse0)) {
+			if (Input.GetKeyDown (KeyCode.Mouse0)) 
+			{
+				
 				Shoot ();
 			}
 		}
 
-		if (health <= 0 || !inBounds) {
+		if (health <= 0 || !inBounds) 
+		{
+			
 			Die ();
 			health = 100;
 			inBounds = true;
@@ -176,7 +202,6 @@ public class PlayerMovement : MonoBehaviour {
 		if (other.tag == "MainCamera") {
 			inBounds = false;
 		}
-		Debug.Log (inBounds);
 	}
 
 /*------------ Public methods -----------------*/
