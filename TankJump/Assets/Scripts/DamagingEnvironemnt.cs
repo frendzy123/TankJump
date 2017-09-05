@@ -10,7 +10,7 @@ public class DamagingEnvironemnt : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
-		damage = 20;
+		damage = 100;
 		damageDelay = 2;
 	}
 	
