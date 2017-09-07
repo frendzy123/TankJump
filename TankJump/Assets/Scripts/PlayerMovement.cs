@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour {
 	public int health;
 	public int ammo;
 	public float speed;
+	public float bulletSpeed;
 	public float invincibilityTime = 0.2f;
 
 	private GameObject turret;
@@ -33,7 +34,7 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		health= 100;
 		ammo = 500;
-		speed = 2.0f;
+
 
 		HUD = GameObject.FindWithTag("HUD");
 
@@ -98,7 +99,8 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per physics loop
 	void FixedUpdate()
 	{
-
+		//Vector3 playerPos = transform.position;
+		//transform.position = Movement (playerPos);
 		if(rigid.velocity == Vector2.zero) 
 		{
 			EnableMovement();
@@ -170,7 +172,7 @@ public class PlayerMovement : MonoBehaviour {
 			Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), turret.GetComponent<Collider2D>()); // Ignore collisions with turret
 			//Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>(), transform.parent.parent.GetComponent<Collider2D>()); // Ignore collisions with tank
 			Rigidbody2D bulletRigid = (Rigidbody2D) bullet.GetComponent<Rigidbody2D>(); // Get rigidbody from the bullet.
-			bulletRigid.velocity = turret.transform.right * speed; // Add a velocity towards the direction of the shooting points
+			bulletRigid.velocity = turret.transform.right * bulletSpeed; // Add a velocity towards the direction of the shooting points
 			ChangeAmmo(-1);
 		}
 

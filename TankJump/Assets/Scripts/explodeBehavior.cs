@@ -24,28 +24,37 @@ public class explodeBehavior : MonoBehaviour {
 		//GameObject col = FindParent(other.gameObject, "Player");
 		//Debug.Log(other);
 
-		if (other.tag == "Player" /*&& !other.GetComponentInParent<PlayerMovement>().checkInvincible()*/) {
-			//other.GetComponentInParent<PlayerMovement> ().enableInvincible();
+		if (other.tag == "Player") {
+			Vector2 playerLocation = other.gameObject.transform.position;
+			Vector2 explosionLocation = gameObject.transform.position;
+
+			Vector2 direction = (playerLocation - explosionLocation);
+
+
+			if (direction.x < 0) {
+				returnVelConst = -1;
+			}
+
+			else {
+				returnVelConst = 1;
+				bulletVelocity = new Vector2 (Mathf.Abs (bulletVelocity.x), Mathf.Abs(bulletVelocity.y));
+			}
+
 			playerBody = other.GetComponent<Rigidbody2D>();
+			Debug.Log ("bulletVelocity " + bulletVelocity);
+			Debug.Log ("return " + returnVelConst);
+
+
+
 			playerBody.velocity = bulletVelocity * returnVelConst;
-			//other.gameObject.GetComponent<PlayerController>().health -= selfDamage;
+			Debug.Log ("player " + playerBody.velocity);
+
 
 			other.GetComponentInParent<PlayerMovement>().DealDamage(-selfDamage);
 			other.GetComponentInParent<PlayerMovement> ().DisableMovement();
 		}
+			
 	}
-
-	GameObject FindParent (GameObject child, string tag) {
-		Transform t = child.transform;
-
-		while (t.parent != null) {
-			if (t.parent.tag == tag) {
-				return t.parent.gameObject;
-			}
-			t = t.parent.transform;
-		}
-		return null;
-	} 
 
 	public void KnockbackSpeed(Vector3 vel) {
 		bulletVelocity = vel;

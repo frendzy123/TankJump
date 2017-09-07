@@ -5,7 +5,6 @@ using UnityEngine;
 public class BulletBehavior : MonoBehaviour {
 
 	public GameObject explosion;
-	public int returnVelConst = -1;
 	public float hitRadius = 1;
 
 	private Vector3 bulletVelocity;
@@ -20,7 +19,7 @@ public class BulletBehavior : MonoBehaviour {
 	// Update is called once per frame
 	void Update() 
 	{
-
+		//Debug.Log (this.gameObject.GetComponent<Rigidbody2D>().velocity);
 	}
 
 	// Function used to destroy when bullet collides with something.
