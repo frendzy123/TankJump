@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour {
 	public float speed;
 	public float bulletSpeed;
 	public float invincibilityTime = 0.2f;
+	public float cameraMin;
+	public float cameraMax;
 
 	private GameObject turret;
 	private SpriteRenderer[] renderer;
@@ -99,6 +101,18 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per physics loop
 	void FixedUpdate()
 	{
+		if (transform.position.x > cameraMax) {
+			Vector3 temp = new Vector3 (cameraMax, transform.position.y, transform.position.z);
+			transform.position = Vector3.zero + temp;
+
+		}
+
+		if (transform.position.x < cameraMin) {
+			Vector3 temp = new Vector3 (cameraMin, transform.position.y,transform.position.z);
+			transform.position = Vector3.zero + temp;
+
+		}
+
 		//Vector3 playerPos = transform.position;
 		//transform.position = Movement (playerPos);
 		if(rigid.velocity == Vector2.zero) 
@@ -122,14 +136,6 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		var move = new Vector3(Input.GetAxis("Horizontal"), 0);
 		pos += move * speed * Time.deltaTime;
-
-		/*if (pos.x > Camera.main.orthographicSize+21f) {
-			pos.x = Camera.main.orthographicSize+21f;
-		}
-
-		if (pos.x < -Camera.main.orthographicSize+10f) {
-			pos.x = -Camera.main.orthographicSize+10f;
-		}*/
 
 		return pos;
 
@@ -194,13 +200,7 @@ public class PlayerMovement : MonoBehaviour {
 		isAlive = true;
 	}
 
-	void OnTriggerStay2D(Collider2D other) {
-		if (other.tag == "MainCamera") {
-			inBounds = true;
-		}
-	}
-
-	void OnTriggerExit2D(Collider2D other) {
+	void OnTriggerEnter2D(Collider2D other) {
 		if (other.tag == "MainCamera") {
 			inBounds = false;
 		}

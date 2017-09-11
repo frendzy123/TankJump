@@ -41,14 +41,11 @@ public class explodeBehavior : MonoBehaviour {
 			}
 
 			playerBody = other.GetComponent<Rigidbody2D>();
-			Debug.Log ("bulletVelocity " + bulletVelocity);
-			Debug.Log ("return " + returnVelConst);
-
-
+			//Debug.Log ("bulletVelocity " + bulletVelocity);
+			//Debug.Log ("return " + returnVelConst);
 
 			playerBody.velocity = bulletVelocity * returnVelConst;
-			Debug.Log ("player " + playerBody.velocity);
-
+			//Debug.Log ("player " + playerBody.velocity);
 
 			other.GetComponentInParent<PlayerMovement>().DealDamage(-selfDamage);
 			other.GetComponentInParent<PlayerMovement> ().DisableMovement();
