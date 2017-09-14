@@ -26,7 +26,7 @@ public class DestructableEnvironment : MonoBehaviour {
 		}
 	}
 
-	void OnCollisionEnter2D(Collision2D coll)
+	/*void OnCollisionEnter2D(Collision2D coll)
 	{
 
 		if (coll.gameObject.tag == "Player") 
@@ -34,5 +34,5 @@ public class DestructableEnvironment : MonoBehaviour {
 
 			Destroy (this.gameObject, delay);
 		}
-	}
+	}*/
 }

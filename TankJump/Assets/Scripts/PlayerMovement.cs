@@ -45,8 +45,10 @@ public class PlayerMovement : MonoBehaviour {
 		hud [0].text = health.ToString();
 		hud [1].text = ammo.ToString();
 
+
 		turret = transform.Find("turret").gameObject;
-		rigid = this.gameObject.GetComponent<Rigidbody2D> ();
+		rigid = this.gameObject.GetComponent<Rigidbody2D>();
+		Debug.Log (rigid);
 		renderer = this.gameObject.GetComponentsInChildren<SpriteRenderer> ();
 
 	}
