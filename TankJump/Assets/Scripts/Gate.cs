@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,7 @@ public class Gate : MonoBehaviour {
 
 	private GameObject[] switches;
 	private int count;
+	private bool check = false;
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +22,7 @@ public class Gate : MonoBehaviour {
 		foreach(GameObject obj in switches)
 		{
 
-			if (!obj.GetComponent<Switch> ().active) 
+			if (obj != null && !obj.GetComponent<Switch> ().active) 
 			{
 
 				break;
@@ -29,8 +31,9 @@ public class Gate : MonoBehaviour {
 			count += 1;
 		}
 
-		if (count == switches.Length) {
-
+		if (count == switches.Length) 
+		{
+			
 			Destroy (this.gameObject);
 		} 
 
@@ -41,3 +44,4 @@ public class Gate : MonoBehaviour {
 		}
 	}
 }
+	

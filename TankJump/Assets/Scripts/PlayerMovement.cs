@@ -34,8 +34,8 @@ public class PlayerMovement : MonoBehaviour {
 	// Use this for initialization
 	void Start() 
 	{
-		health= 100;
-		ammo = 500;
+		health = 100;
+		ammo = 1000;
 
 
 		HUD = GameObject.FindWithTag("HUD");
