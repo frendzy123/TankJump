@@ -32,7 +32,7 @@ public class LevelEditor : MonoBehaviour {
 	}
 
 	private void LoadLevel() {
-		Empty();
+		EmptyLevel();
 
 		Color32[] allPixels = level.GetPixels32();
 		int width = level.width;
@@ -55,12 +55,7 @@ public class LevelEditor : MonoBehaviour {
 			Destroy (c.gameObject);//destroys child 
 		}
 	}
-
-	private IEnumerator Empty() {
-		EmptyLevel ();
-		yield return new WaitForSeconds (1f);
-	}
-
+		
 	private void GenerateTile(Color32 c, int x, int y) 
 	{
 		
